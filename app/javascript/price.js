@@ -7,7 +7,6 @@ function price (){
 
   console.log(form)
   form.addEventListener("input",() => {
-    console.log(form.value)
     const currentInput = form.value
     const taxPrice = Math.floor(currentInput * 0.1)
     const profit = Math.floor(currentInput - taxPrice)
@@ -19,3 +18,4 @@ function price (){
 };
 
 window.addEventListener('turbo:load', price);
+window.addEventListener("turbo:render", price);

@@ -5,8 +5,11 @@ class Item < ApplicationRecord
   belongs_to :shipping_fee_status
   belongs_to :prefecture
   belongs_to :scheduled_delivery
+  has_one_attached :image
+  belongs_to :user
 
   with_options presence: true do
+    validates :image
     validates :name
     validates :description
     validates :price, numericality: {

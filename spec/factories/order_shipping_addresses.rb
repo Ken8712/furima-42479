@@ -6,5 +6,7 @@ FactoryBot.define do
     street_address { "北1条西2丁目" }
     building_name { "札幌市役所庁舎" }
     phone_number { "0112112111" }
+    token { "tok_34edf54da3cec04537299337f657" }
+    price { "5000" }
   end
 end

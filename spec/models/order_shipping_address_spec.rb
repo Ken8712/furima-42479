@@ -66,6 +66,17 @@ RSpec.describe OrderShippingAddress, type: :model do
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include("Item can't be blank")
       end
+      it "tokenが空だと保存できない" do
+        @order_shipping_address.token = ""
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it "priceが空だと保存できない" do
+        @order_shipping_address.price = ""
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include("Price can't be blank")
+      end
+      
 
 
 

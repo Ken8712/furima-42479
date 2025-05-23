@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to action: :index unless current_user.id == @item.user_id
+    redirect_to action: :index if unauthorized_edit_access?
   end
 
   def update
@@ -49,5 +49,9 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
+  end
+
+  def unauthorized_edit_access?
+    current_user.id != @item.user_id || @item.order.present?
   end
 end

@@ -50,8 +50,18 @@ RSpec.describe OrderShippingAddress, type: :model do
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberが10-11桁の半角数字のみで記述されていないと保存できない' do
+      it 'phone_numberがハイフンを含んでいると保存できない' do
         @order_shipping_address.phone_number = '011-211-2111'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include('Phone number must be 10 or 11 digits and not include hyphen(-)')
+      end
+      it 'phone_numberが12桁以上だと保存できない' do
+        @order_shipping_address.phone_number = '011211211111'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include('Phone number must be 10 or 11 digits and not include hyphen(-)')
+      end
+      it 'phone_numberが9桁以下だと保存できない' do
+        @order_shipping_address.phone_number = '011211211'
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include('Phone number must be 10 or 11 digits and not include hyphen(-)')
       end

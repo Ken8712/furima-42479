@@ -1,5 +1,6 @@
 function price (){
   const form = document.getElementById("item-price")
+  if (!form) return;
   const taxPriceItem = document.getElementById("add-tax-price")
   const profitItem = document.getElementById("profit")
 

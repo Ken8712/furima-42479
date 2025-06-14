@@ -31,4 +31,16 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
   end
+
+  # Nokogiri/glibc互換性問題の対策としてforce_ruby_platformを設定
+  desc 'Set force_ruby_platform to true for Bundler'
+  task :set_force_ruby_platform do
+    on roles(:app) do
+      within release_path do
+        execute :bundle, :config, :set, :force_ruby_platform, :true
+      end
+    end
+  end
+  # bundle:installの前に上記のタスクを実行
+  before 'bundler:install', 'deploy:set_force_ruby_platform'
 end
